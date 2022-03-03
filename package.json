@@ -3,18 +3,32 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "expo start --dev-client",
+    "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.5",
+    "@react-native-community/cameraroll": "^4.1.2",
+    "@react-native-masked-view/masked-view": "0.2.6",
+    "@react-navigation/material-top-tabs": "^6.1.1",
+    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native-stack": "^6.5.0",
     "expo": "~44.0.2",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-biometrics": "^2.1.4",
+    "react-native-camera": "^4.2.1",
+    "react-native-gesture-handler": "~2.1.0",
+    "react-native-pager-view": "5.4.9",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
+    "react-native-tab-view": "^3.1.1",
+    "react-native-video": "^5.2.0",
     "react-native-web": "0.17.1"
   },
   "devDependencies": {

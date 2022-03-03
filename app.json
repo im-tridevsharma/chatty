@@ -1,11 +1,14 @@
 {
   "expo": {
-    "name": "chatty",
-    "slug": "chatty",
+    "name": "Chatty",
+    "slug": "Chatty",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.hts"
+    }
   },
-  "name": "chatty"
+  "name": "Chatty"
 }
