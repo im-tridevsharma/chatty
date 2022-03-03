@@ -8,17 +8,28 @@ import {
 } from "react-native";
 import { useMainContext } from "../context";
 import style from "../config/style";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import CameraComponent from "../components/CameraComponent";
+import { ScrollView } from "react-native-gesture-handler";
+import Input from "../components/Input";
+import OutlineButton from "../components/OutlineButton";
 
 const EditProfileScreen = ({ navigation }) => {
-  const { theme, scheme, setStatusBar } = useMainContext();
-  React.useEffect(() => {
-    setStatusBar(false);
+  const { theme, scheme } = useMainContext();
+  const [openCam, setOpenCam] = React.useState(0);
+  const [profilePic, setProfilePic] = React.useState("");
+  const [backgroundPic, setBackgroundPic] = React.useState("");
+  const [profileData, setProfileData] = React.useState({
+    fullname: "",
+    about: "#karma is everything, 💘💗 to others and your self. we are one.",
+    dob: "15-01-1998",
+    emial: "",
+    location: "",
+  });
 
-    return () => {
-      setStatusBar(true);
-    };
-  }, []);
+  const updateProfileData = (name, value) => {
+    setProfileData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <View
@@ -29,40 +40,107 @@ const EditProfileScreen = ({ navigation }) => {
     >
       <ImageBackground
         source={{
-          uri: "https://www.holidify.com/images/cmsuploads/compressed/5621259188_e74d63cb05_b_20180302140149.jpg",
+          uri: backgroundPic
+            ? backgroundPic
+            : "https://www.holidify.com/images/cmsuploads/compressed/5621259188_e74d63cb05_b_20180302140149.jpg",
         }}
         style={styles.background}
         resizeMode="cover"
       >
-        <View style={styles.overlayIcon}>
-          <TouchableOpacity style={styles.iconCover}>
-            <Ionicons
-              name="camera"
-              size={22}
-              color={scheme === "light" ? theme.gray : theme.white}
-            />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.btnbg}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={22} color={theme.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setOpenCam(1)}
+          style={styles.iconCover}
+        >
+          <Ionicons name="camera" size={22} color={theme.white} />
+        </TouchableOpacity>
         <View style={{ ...styles.image, borderColor: theme.primary }}>
           <Image
-            style={{ width: 80, height: 80 }}
+            style={{ width: 80, height: 80, borderRadius: 40 }}
             source={{
-              uri: "https://th.bing.com/th/id/OIP.vYB5T92_-0Ax-rU3zImGgAHaHa?pid=ImgDet&rs=1",
+              uri: profilePic
+                ? profilePic
+                : "https://th.bing.com/th/id/OIP.vYB5T92_-0Ax-rU3zImGgAHaHa?pid=ImgDet&rs=1",
             }}
             resizeMode="cover"
           />
           <TouchableOpacity
-            onPress={() => navigation.navigate("Camera")}
-            style={{ ...styles.iconCover, position: "absolute" }}
+            onPress={() => setOpenCam(2)}
+            style={{
+              ...styles.iconCover,
+              position: "absolute",
+              left: -25,
+              zIndex: 100,
+            }}
           >
-            <Ionicons
-              name="camera"
-              size={22}
-              color={scheme === "light" ? theme.gray : theme.white}
-            />
+            <Ionicons name="camera" size={22} color={theme.white} />
           </TouchableOpacity>
         </View>
       </ImageBackground>
+
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 50, paddingTop: 50 }}
+        style={{ flex: 1, padding: style.padding }}
+      >
+        <Input
+          label="Full Name"
+          value={profileData?.fullname}
+          setValue={(value) => updateProfileData("fullname", value)}
+        />
+        <Input
+          label="About"
+          value={profileData?.about}
+          setValue={(value) => updateProfileData("about", value)}
+          rest={{
+            multiline: true,
+            numberOfLines: 5,
+            scrollEnabled: true,
+            textAlignVertical: "top",
+          }}
+        />
+        <Input
+          icon={true}
+          value={profileData?.dob}
+          setValue={(value) => updateProfileData("dob", value)}
+          date={true}
+          iconName="eye"
+          label="Date of Birth"
+        />
+        <Input
+          icon={true}
+          value={profileData?.email}
+          setValue={(value) => updateProfileData("email", value)}
+          iconName="eye"
+          label="Email"
+        />
+        <Input
+          icon={true}
+          value={profileData?.location}
+          setValue={(value) => updateProfileData("location", value)}
+          iconName="eye"
+          label="Location"
+        />
+
+        <View style={{ alignItems: "center" }}>
+          <OutlineButton label="Update" />
+        </View>
+      </ScrollView>
+
+      {openCam !== 0 && (
+        <View style={StyleSheet.absoluteFill}>
+          <CameraComponent
+            navigation={navigation}
+            closer={() => setOpenCam(0)}
+            close={true}
+            uriCallback={openCam === 1 ? setBackgroundPic : setProfilePic}
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -70,17 +148,11 @@ const EditProfileScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   background: {
     height: 180,
+    paddingLeft: style.padding,
+    justifyContent: "flex-end",
+    paddingBottom: 10,
   },
-  overlayIcon: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    left: 0,
-    top: 0,
-    backgroundColor: "rgba(0,0,0,.1)",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   iconCover: {
     width: 40,
     height: 40,
@@ -99,7 +171,6 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     alignItems: "center",
     justifyContent: "center",
-    overflow: "hidden",
   },
   btn: {
     paddingVertical: 10,
@@ -110,6 +181,17 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: "Montserrat-Bold",
     fontSize: 18,
+  },
+  btnbg: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,.1)",
+    position: "absolute",
+    left: style.padding,
+    top: 10,
   },
 });
 

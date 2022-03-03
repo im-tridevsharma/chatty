@@ -29,7 +29,7 @@ const MainStack = () => {
       />
       <Stack.Screen
         name="Chatting"
-        options={{ headerShown: false, animation: "slide_from_right" }}
+        options={{ headerShown: false, animation: "slide_from_left" }}
         component={ChattingScreen}
       />
       <Stack.Screen

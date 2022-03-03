@@ -56,14 +56,21 @@ const StatusFrame = ({ number, frame, current, setNext, navigation }) => {
 
   return (
     <>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: 5,
+        }}
+      >
         {Array.from({ length: number }).map((_, index) => (
           <View
             key={index}
             style={{
               ...styles.bar,
               width: eachWith,
-              backgroundColor: scheme === "light" ? theme.snow : theme.dimWhite,
+              backgroundColor:
+                scheme === "light" ? theme.dimWhite : theme.dimWhite,
             }}
           >
             <View

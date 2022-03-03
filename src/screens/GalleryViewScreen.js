@@ -18,7 +18,7 @@ import { useMainContext } from "../context";
 const GalleryViewScreen = ({ navigation }) => {
   const { theme, scheme } = useMainContext();
   const [photos, setPhotos] = React.useState([]);
-  const [preview, setPreview] = React.useState("");
+  const [preview, setPreview] = React.useState(false);
   const { width } = Dimensions.get("window");
 
   const hasAndroidPermission = async () => {
@@ -58,22 +58,18 @@ const GalleryViewScreen = ({ navigation }) => {
     >
       <View style={{ ...styles.header, backgroundColor: theme.primary }}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons
-            name="arrow-back"
-            size={22}
-            color={scheme === "light" ? theme.gray : theme.white}
-          />
+          <Ionicons name="arrow-back" size={22} color={theme.white} />
         </TouchableOpacity>
         <TouchableOpacity>
           <MaterialCommunityIcons
             name="checkbox-multiple-marked-outline"
             size={22}
-            color={scheme === "light" ? theme.gray : theme.white}
+            color={theme.white}
           />
         </TouchableOpacity>
       </View>
 
-      {preview !== "" && (
+      {preview && (
         <View style={{ ...StyleSheet.absoluteFill, zIndex: 100 }}>
           <ImagePreview source={preview} setPreview={setPreview} />
         </View>
