@@ -13,7 +13,7 @@ const CameraScreen = ({ navigation }) => {
         backgroundColor: scheme === "light" ? theme.white : theme.gray,
       }}
     >
-      <CameraComponent />
+      <CameraComponent navigation={navigation} />
     </View>
   );
 };

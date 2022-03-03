@@ -13,24 +13,10 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import style from "../config/style";
 import dummy from "../dummy.json";
 import PostItem from "../components/PostItem";
-import { useIsFocused } from "@react-navigation/native";
 
 const ProfileScreen = ({ navigation }) => {
-  const { theme, scheme, setStatusBar } = useMainContext();
+  const { theme, scheme } = useMainContext();
   const [isScrolled, setIsScrolled] = React.useState(false);
-  const isFocused = useIsFocused();
-
-  React.useEffect(() => {
-    if (isScrolled) {
-      setStatusBar(true);
-    } else {
-      setStatusBar(false);
-    }
-    return () => {
-      setStatusBar(true);
-    };
-  }, [isScrolled, isFocused]);
-
   const scrolling = (event) => {
     if (event.nativeEvent.contentOffset.y > 100) {
       setIsScrolled(true);
@@ -69,7 +55,12 @@ const ProfileScreen = ({ navigation }) => {
               backgroundColor: theme.secondary || theme.primary,
             }}
           >
-            <Text style={{ fontFamily: "Montserrat-Regular" }}>
+            <Text
+              style={{
+                fontFamily: "Montserrat-Regular",
+                color: scheme === "light" ? theme.white : theme.gray,
+              }}
+            >
               Edit Proifle
             </Text>
           </TouchableOpacity>
@@ -96,7 +87,7 @@ const ProfileScreen = ({ navigation }) => {
           <Text
             style={{
               fontFamily: "Montserrat-Regular",
-              color: theme.white,
+              color: scheme === "light" ? theme.gray : theme.white,
               marginTop: 5,
             }}
           >
@@ -167,7 +158,7 @@ const ProfileScreen = ({ navigation }) => {
           position: "absolute",
           width: "100%",
           zIndex: 100,
-          top: isScrolled ? 0 : 40,
+          top: 0,
           backgroundColor: isScrolled
             ? scheme === "light"
               ? theme.white
@@ -182,14 +173,26 @@ const ProfileScreen = ({ navigation }) => {
           <Ionicons
             name="arrow-back"
             size={22}
-            color={scheme === "light" ? theme.gray : theme.white}
+            color={
+              scheme === "light"
+                ? isScrolled
+                  ? theme.gray
+                  : theme.white
+                : theme.white
+            }
           />
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnbg}>
           <MaterialCommunityIcons
             name="dots-vertical"
             size={22}
-            color={scheme === "light" ? theme.gray : theme.white}
+            color={
+              scheme === "light"
+                ? isScrolled
+                  ? theme.gray
+                  : theme.white
+                : theme.white
+            }
           />
         </TouchableOpacity>
       </View>

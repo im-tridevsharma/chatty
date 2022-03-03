@@ -8,16 +8,12 @@ import {
   Text,
 } from "react-native";
 
-import { useMainContext } from "../context";
-
 const ImagePreview = ({ source, setPreview }) => {
-  const { theme } = useMainContext();
-
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground source={{ uri: source }} style={styles.preview} />
-      <View style={{ ...styles.bottomAction, backgroundColor: theme.primary }}>
-        <TouchableOpacity style={styles.icon} onPress={() => setPreview("")}>
+      <View style={{ ...styles.bottomAction }}>
+        <TouchableOpacity style={styles.icon} onPress={() => setPreview(false)}>
           <SimpleLineIcons name="close" size={25} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.post}>
@@ -44,6 +40,9 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "center",
     justifyContent: "space-around",
+    backgroundColor: "transparent",
+    position: "absolute",
+    bottom: 0,
   },
   post: {
     padding: 20,

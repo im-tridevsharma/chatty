@@ -8,6 +8,11 @@
     ],
     "android": {
       "package": "com.hts"
+    },
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "backgroundColor": "#FF6666",
+      "resizeMode" : "cover"
     }
   },
   "name": "Chatty"
