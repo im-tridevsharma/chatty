@@ -4632,6 +4632,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-android-pip@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-android-pip/-/react-native-android-pip-1.0.1.tgz#4ff222ea8c586eacd95e25a239920e68e9facb32"
+  integrity sha512-DJ1ycT/QnbnHrfipIOPNmx/YDNS11zY5uVGS+eZcFL1TLgb+9JbctNiN0sEiC6xwRTpcxJZQW7gJXQr0yYE5NQ==
+
 react-native-biometrics@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/react-native-biometrics/-/react-native-biometrics-2.1.4.tgz#e201e9f18baeb560eeaba8d41fbd4f90d04152fe"
@@ -4681,6 +4686,11 @@ react-native-screens@~3.10.1:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-sms-retriever@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-sms-retriever/-/react-native-sms-retriever-1.1.1.tgz#e87225836b394560c63db4c106552a0b9247d9b3"
+  integrity sha512-WRwiITfssx59+TB1iEMmjB7w4OTkatR34js5+4a4pP2jMXJ4aLdXK0hOtHxl8ciS8aIejdd49Sz8AXonlvtdRw==
 
 react-native-tab-view@^3.1.1:
   version "3.1.1"
