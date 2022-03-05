@@ -15,6 +15,7 @@ import flag from "../../assets/icons/flag.jpg";
 import Loader from "../../components/Loader";
 import OutlineButton from "../../components/OutlineButton";
 import { useMainContext } from "../../context";
+import SmsRetriever from "react-native-sms-retriever";
 
 const LoginScreen = ({ navigation }) => {
   const { theme } = useMainContext();
@@ -53,6 +54,17 @@ const LoginScreen = ({ navigation }) => {
       }
     }, 1000);
   };
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const phoneNumber = await SmsRetriever.requestPhoneNumber();
+        setNumber(phoneNumber.replace("+91", ""));
+      } catch (error) {
+        console.log(JSON.stringify(error));
+      }
+    })();
+  }, []);
 
   return (
     <ScrollView contentContainerStyle={{ flex: 1 }}>
